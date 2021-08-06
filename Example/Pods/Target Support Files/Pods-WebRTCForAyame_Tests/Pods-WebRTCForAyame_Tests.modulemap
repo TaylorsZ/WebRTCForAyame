@@ -1,0 +1,6 @@
+framework module Pods_WebRTCForAyame_Tests {
+  umbrella header "Pods-WebRTCForAyame_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

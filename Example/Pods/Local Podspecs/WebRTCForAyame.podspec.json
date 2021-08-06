@@ -1,0 +1,42 @@
+{
+  "name": "WebRTCForAyame",
+  "version": "0.1.1",
+  "summary": "WebRTCForAyame",
+  "description": "Ayame在iOS上的使用",
+  "homepage": "https://github.com/TaylorsZ/WebRTCForAyame.git",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "zhangs1992@126.com": "zhangs1992@126.com"
+  },
+  "source": {
+    "git": "https://github.com/TaylorsZ/WebRTCForAyame.git",
+    "tag": "0.1.1"
+  },
+  "platforms": {
+    "ios": "11.0"
+  },
+  "source_files": "WebRTCForAyame/Classes/**/*",
+  "swift_versions": "5.0",
+  "public_header_files": "Pod/Classes/**/*.swift",
+  "dependencies": {
+    "ReachabilitySwift": [
+
+    ],
+    "SocketRocket": [
+
+    ],
+    "GoogleWebRTC": [
+
+    ],
+    "ZSGCDTimer": [
+
+    ],
+    "DJIWidget": [
+
+    ]
+  },
+  "swift_version": "5.0"
+}

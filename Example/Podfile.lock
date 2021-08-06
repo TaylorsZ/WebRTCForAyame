@@ -1,0 +1,54 @@
+PODS:
+  - DJIWidget (1.6.5)
+  - GoogleWebRTC (1.1.31999)
+  - ReachabilitySwift (5.0.0)
+  - SocketRocket (0.5.1)
+  - WebRTCForAyame (0.1.1):
+    - DJIWidget
+    - GoogleWebRTC
+    - ReachabilitySwift
+    - SocketRocket
+    - ZSGCDTimer
+  - ZSGCDTimer (0.1.0)
+
+DEPENDENCIES:
+  - DJIWidget (from `https://gitee.com/TaylorZhang/DJIWidget.git`)
+  - GoogleWebRTC (~> 1.1)
+  - ReachabilitySwift
+  - SocketRocket
+  - WebRTCForAyame (from `../`)
+  - ZSGCDTimer (from `https://gitee.com/TaylorZhang/ZSGCDTimer.git`)
+
+SPEC REPOS:
+  trunk:
+    - GoogleWebRTC
+    - ReachabilitySwift
+    - SocketRocket
+
+EXTERNAL SOURCES:
+  DJIWidget:
+    :git: https://gitee.com/TaylorZhang/DJIWidget.git
+  WebRTCForAyame:
+    :path: "../"
+  ZSGCDTimer:
+    :git: https://gitee.com/TaylorZhang/ZSGCDTimer.git
+
+CHECKOUT OPTIONS:
+  DJIWidget:
+    :commit: e736542a549246fe961d9dcee40fd436c7775c84
+    :git: https://gitee.com/TaylorZhang/DJIWidget.git
+  ZSGCDTimer:
+    :commit: b5b3495601b0633f7305525ca5959ec14a78d484
+    :git: https://gitee.com/TaylorZhang/ZSGCDTimer.git
+
+SPEC CHECKSUMS:
+  DJIWidget: c592143a31f182a7e97a894168c4363ad42c6ff2
+  GoogleWebRTC: b39a78c4f5cc6b0323415b9233db03a2faa7b0f0
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
+  WebRTCForAyame: f4580a82d67bcd33a5d75c6600714b8d8a784514
+  ZSGCDTimer: eb79d32592cee5117e9b84206d1d26566f13ca94
+
+PODFILE CHECKSUM: 314e40b2f5bcbb9a0fe5031c9a9d46263a58b8a1
+
+COCOAPODS: 1.10.2

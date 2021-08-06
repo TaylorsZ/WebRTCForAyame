@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'WebRTCForAyame'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of WebRTCForAyame.'
+  s.version          = '0.1.1'
+  s.summary          = 'WebRTCForAyame'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,25 +18,30 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+
+  Ayame在iOS上的使用
                        DESC
 
-  s.homepage         = 'https://github.com/zhangs1992@126.com/WebRTCForAyame'
+  s.homepage         = 'https://github.com/TaylorsZ/WebRTCForAyame.git'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'zhangs1992@126.com' => 'zhangs1992@126.com' }
-  s.source           = { :git => 'https://github.com/zhangs1992@126.com/WebRTCForAyame.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/TaylorsZ/WebRTCForAyame.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '11.0'
 
   s.source_files = 'WebRTCForAyame/Classes/**/*'
-  
+  s.swift_version='5.0'
   # s.resource_bundles = {
   #   'WebRTCForAyame' => ['WebRTCForAyame/Assets/*.png']
   # }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
+   s.public_header_files = 'Pod/Classes/**/*.swift'
   # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+   s.dependency 'ReachabilitySwift'
+   s.dependency 'SocketRocket'
+   s.dependency 'GoogleWebRTC'
+   s.dependency 'ZSGCDTimer'
+   s.dependency 'DJIWidget'
 end

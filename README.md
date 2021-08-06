@@ -9,7 +9,6 @@
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-## Requirements
 
 ## Installation
 
@@ -22,7 +21,7 @@ pod 'WebRTCForAyame'
 
 ## Author
 
-zhangs1992@126.com, zhangs1992@126.com
+Taylor
 
 ## License
 

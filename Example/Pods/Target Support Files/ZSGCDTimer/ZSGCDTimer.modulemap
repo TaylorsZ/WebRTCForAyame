@@ -1,0 +1,6 @@
+framework module ZSGCDTimer {
+  umbrella header "ZSGCDTimer-umbrella.h"
+
+  export *
+  module * { export * }
+}
