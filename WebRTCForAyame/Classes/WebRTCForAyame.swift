@@ -8,14 +8,15 @@
 import UIKit
 import WebRTC
 
-public protocol WebRTCManagerDelegate {
-    func webRTCManager(manager:WebRTCForAyame ,peerConnection: RTCPeerConnection, didRemove candidates: [RTCIceCandidate]);
+ public protocol WebRTCManagerDelegate {
+    
+     func webRTCManager(manager:WebRTCForAyame ,peerConnection: RTCPeerConnection, didRemove candidates: [RTCIceCandidate]);
     func webRTCManager(manager:WebRTCForAyame ,peerConnection: RTCPeerConnection, didOpen dataChannel: RTCDataChannel);
     func webRTCManager(manager:WebRTCForAyame ,peerConnection: RTCPeerConnection, didRemove stream: RTCMediaStream);
     func webRTCManager(manager:WebRTCForAyame ,peerConnection: RTCPeerConnection, didAdd stream: RTCMediaStream);
     func webRTCManager(manager:WebRTCForAyame ,peerConnection: RTCPeerConnection, didChange stateChanged: RTCSignalingState);
     
-    func webRTCManager(manager:WebRTCForAyame ,didLeaveRoom connectid:String);
+    func webRTCManager(manager:WebRTCForAyame ,didLeaveRoom connectid:String?);
     
 }
 public struct AdaptOutputFormat{
@@ -65,7 +66,7 @@ open class WebRTCForAyame: NSObject {
    
   
     open var delegate:WebRTCManagerDelegate?
-    
+    public var isLiving:Bool  =  false;
     private static var _sharedInstance: WebRTCForAyame?
     
     open class func shared() -> WebRTCForAyame {
@@ -88,8 +89,9 @@ open class WebRTCForAyame: NSObject {
         return self // SingletonClass.shared
     }
     //销毁单例对象
-    class func destroy() {
-        _sharedInstance = nil
+    open class func destroy() {
+        _sharedInstance = nil;
+        
         WRSocketManager.shared().delegate = nil;
     }
     
@@ -113,16 +115,22 @@ extension WebRTCForAyame {
     /// - Parameters:
     ///   - server: 服务器地址
     ///   - room: 房间号
-    open func connectServer(server:String,room:String,client:String,iceServers:[RTCIceServer]? = nil) {
+    open func connectServer(server:String,room:String,client:String,iceServers:[[String:String]]? = nil) {
         
         self.server = server;
         self.room = room;
         self.client = client;
         if let ices = iceServers {
-            self.iceServers = ices;
+            do {
+                self.iceServers = try fromJson(ices);
+            } catch {
+                Logger.debug(error.localizedDescription);
+            }
         }
         WRSocketManager.shared().linkSocket(server);
+        isLiving = true;
     }
+    
  
     /// 退出房间
     open func exitRoom() {
@@ -143,6 +151,7 @@ extension WebRTCForAyame {
        
         videoCapture = nil;
         closePeerConnection();
+        isLiving = false;
     }
   
     
@@ -243,8 +252,6 @@ extension WebRTCForAyame {
                 })
             }
             break;
-            
-            
         case .haveLocalOffer:
             let type = peerConnection.localDescription!.type;
             //判断连接状态为本地发送offer
@@ -455,8 +462,8 @@ extension WebRTCForAyame : WRSocketDelegate{
             
         case "bye":
             //离开房间的事件
-            Logger.debug("关闭视频")
-            delegate?.webRTCManager(manager: self, didLeaveRoom: connectId!);
+            Logger.debug("关闭视频");
+            delegate?.webRTCManager(manager: self, didLeaveRoom: connectId);
             exitRoom();
             break;
             
@@ -515,6 +522,22 @@ extension WebRTCForAyame : WRSocketDelegate{
         }
         
     }
+    private func fromJson(_ json:[[String:String]]) throws -> [RTCIceServer] {
+        var ices:[RTCIceServer] = [];
+        
+        for item in json {
+            if let url = item["url"] {
+                if let username = item["username"] ,let credential = item["credential"] {
+                    ices.append(RTCIceServer(urlStrings: [url], username: username, credential: credential));
+                }else{
+                    ices.append(RTCIceServer(urlStrings: [url]));
+                }
+            }else{
+                throw NSError(domain: NSURLErrorFailingURLStringErrorKey, code: 1001, userInfo: [NSLocalizedDescriptionKey:"url地址不能为空"]);
+            }
+        }
+        return ices;
+    }
 }
 
 
@@ -552,3 +575,6 @@ extension WebRTCForAyame {
         }
     }
 }
+
+
+
