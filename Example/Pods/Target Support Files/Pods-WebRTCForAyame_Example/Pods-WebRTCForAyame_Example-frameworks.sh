@@ -181,7 +181,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/WebRTCForAyame/WebRTCForAyame.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/ZSGCDTimer/ZSGCDTimer.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${PODS_ROOT}/DJIWidget/FFmpeg/FFmpeg.framework"
@@ -190,7 +189,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/WebRTCForAyame/WebRTCForAyame.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/ZSGCDTimer/ZSGCDTimer.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

@@ -7,7 +7,7 @@
 
 import Foundation
 import SocketRocket
-import Reachability
+//import Reachability
 
 enum WRSocketConnectType:Int {
     /// 初始状态,未连接
