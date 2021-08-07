@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'WebRTCForAyame'
-  s.version          = '0.1.11'
+  s.version          = '0.1.12'
   s.summary          = 'WebRTCForAyame'
 
 # This description is used to generate tags and improve search results.
@@ -39,7 +39,7 @@ Pod::Spec.new do |s|
 
   # s.public_header_files = 'WebRTCForAyame/Classes/**/*.swift'
   # s.frameworks = 'UIKit', 'MapKit'
-   s.dependency 'ReachabilitySwift'
+#   s.dependency 'ReachabilitySwift'
    s.dependency 'SocketRocket'
    s.dependency 'GoogleWebRTC'
    s.dependency 'DJIWidget'
