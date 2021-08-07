@@ -37,7 +37,7 @@ Pod::Spec.new do |s|
   #   'WebRTCForAyame' => ['WebRTCForAyame/Assets/*.png']
   # }
 
-   s.public_header_files = 'WebRTCForAyame/Classes/**/*.swift'
+  # s.public_header_files = 'WebRTCForAyame/Classes/**/*.swift'
   # s.frameworks = 'UIKit', 'MapKit'
    s.dependency 'ReachabilitySwift'
    s.dependency 'SocketRocket'
