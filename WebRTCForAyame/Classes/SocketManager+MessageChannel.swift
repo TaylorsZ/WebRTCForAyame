@@ -49,11 +49,6 @@ extension WRSocketManager {
         WRSocketManager.shared().sendMessage(convertToJsonData(pong));
     }
    
-    
-    
-    
-    
-    
     /// 将数据转换为json
     /// - Parameter dic: 原始数据
     /// - Returns: json字符串

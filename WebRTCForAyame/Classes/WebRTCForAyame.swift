@@ -47,7 +47,7 @@ open class WebRTCForAyame: NSObject {
     
     /// 视频采集类型
     private var cameraType:RTCCameraType = .device;
-    public  var isDebug:Bool = false;
+    public  var isDebug:Bool = true;
     private var server:String?;
     private var client:String?;
     private var room:String?

@@ -68,10 +68,7 @@ class WRSocketManager: NSObject {
             return false;
         };
         let request = URLRequest(url: socketURL,cachePolicy: .useProtocolCachePolicy,timeoutInterval: 10);
-        guard let socket = SRWebSocket(urlRequest: request) else {
-            Logger.debug("连接失败:创建WebSocket失败");
-            return false;
-        }
+        let socket = SRWebSocket(urlRequest: request);
         socket.delegate = self;
         socket.open();
         webSocket = socket;
@@ -80,7 +77,7 @@ class WRSocketManager: NSObject {
     
     /// 发送消息
     /// - Parameter message: 消息
-    func sendMessage(_ message:Any) {
+    func sendMessage(_ message:String) {
         
         //        let reachability = try! Reachability();
         //        reachability.whenReachable = { reachability in
@@ -108,7 +105,13 @@ class WRSocketManager: NSObject {
         // 只有长连接OPEN开启状态才能调 send 方法，不然会Crash
         switch socket.readyState {
         case .OPEN:
-            socket.send(message);
+//            socket.send(message);
+            do {
+                try socket.send(string: message)
+            } catch {
+                Logger.debug("发送失败:\(error.localizedDescription)")
+            }
+            
             break;
         case .CONNECTING:
             print("正在连接中，重连后会去自动同步数据");
@@ -156,11 +159,9 @@ class WRSocketManager: NSObject {
         connectType = .default;
         webSocket?.close();
         webSocket = nil;
-        
     }
     func connectServer() {
         isActivelyClose = false;
-        
         webSocket?.delegate = nil;
         webSocket?.close();
         webSocket = nil;
@@ -169,22 +170,22 @@ class WRSocketManager: NSObject {
 }
 
 extension WRSocketManager :SRWebSocketDelegate{
-    func webSocketDidOpen(_ webSocket: SRWebSocket!) {
+    func webSocketDidOpen(_ webSocket: SRWebSocket) {
         connectType  =  .connect;
         delegate?.wrSocketManager(wrSocketManager: self, connect: .connect);
     }
-    func webSocket(_ webSocket: SRWebSocket!, didFailWithError error: Error!) {
+    func webSocket(_ webSocket: SRWebSocket, didFailWithError error: Error) {
         connectType  =  .disConnect;
         delegate?.wrSocketManager(wrSocketManager: self, connect: .disConnect);
     }
-    func webSocket(_ webSocket: SRWebSocket!, didCloseWithCode code: Int, reason: String!, wasClean: Bool) {
+    func webSocket(_ webSocket: SRWebSocket, didCloseWithCode code: Int, reason: String?, wasClean: Bool) {
         Logger.debug("关闭")
         delegate?.wrSocketManager(wrSocketManager: self, connect: .disConnect)
     }
-    func webSocket(_ webSocket: SRWebSocket!, didReceivePong pongPayload: Data!) {
+    func webSocket(_ webSocket: SRWebSocket, didReceivePong pongPayload: Data?) {
         Logger.debug("接收到pong")
     }
-    func webSocket(_ webSocket: SRWebSocket!, didReceiveMessage message: Any!) {
+    func webSocket(_ webSocket: SRWebSocket, didReceiveMessage message: Any) {
         Logger.debug("获取到:\(String(describing: message))")
         guard let msg = message as? String ,let jsonData = msg.data(using: .utf8) else {
             return;
